@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Result;
 use App\Models\Event;
 use App\Models\User;
-use App\Mail\NewResultMail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class ResultController extends Controller
 {
+         public function __construct()
+    {
+        $this->authorizeResource(Result::class);
+    }
 
     //Shows a given result based on its id
     public function show(Result $result){
-        $this->authorize('view', $result);
+
         $assassment=json_decode($result["assassment"]);
 
         //first part of the program, with the moves to be executed
@@ -43,7 +45,7 @@ class ResultController extends Controller
 
     //creating an empty result for a new rider, based on the event_id
     public function create(Event $event){
-        $this->authorize('create', [Result::class,$event]);
+
         //id is generated randomly, !not sequential 
         $id=$this->generateID();
 
@@ -51,11 +53,9 @@ class ResultController extends Controller
 
     	return view("result.create",["id"=> $id,"event_id"=>$event_id]);
     }
-
     //editing a result, this is method is used both for the first edit, and for the edits afterwards
     public function edit(Result $result){
-        $this->authorize('update', $result);
-    	$this->lastOpened($result);
+
         //first part of the program, with the moves to be executed
         $blocks=$result->event->program->block->where("programpart",1);
 
@@ -79,18 +79,9 @@ class ResultController extends Controller
                                     "eliminated"=>$eliminated,
                                 ]);
     }
-    private function lastOpened(Result $result){
-    	$user=Auth::User();
-    	
-    	$user->last_opened=$result->id;
-    	$user->save();
-    	
 
-
-    }
     //result log: logs every modification, for every result, triggered by the update function
     public function ResultLog($result_id,$mark,$assassment){
-    $this->authorize('update', $result);
         \App\Models\Resultlog::create([
             'result_id' => $result_id,
             'mark'=>$mark,
@@ -102,9 +93,7 @@ class ResultController extends Controller
 
     // stores the empty result in the database
     public function store()
-    {
-
-        $data = request();
+    {$data = request();
 
         //validation rules
     	$data=$data->validate([
@@ -137,8 +126,6 @@ class ResultController extends Controller
         ]);
         return redirect("result/create/{$event_id}");
     }
-
-
 
 
     public function updateResult(Result $result)
@@ -195,7 +182,6 @@ class ResultController extends Controller
         //creating a log record
         $this->ResultLog($resultID,$mark,$assassment);
 
-        $this->sendMail($result);
         //updating the result record
         $result->update($dataOut);
         return redirect("result/show/{$resultID}");
@@ -234,28 +220,6 @@ class ResultController extends Controller
         $result->update($dataOut);
         return redirect("/");
         
-    }
-
-
-    public function search(){
-        $data = request();
-
-        if (!isset($data["search"])) return view("result.search");
-        $data=$data->validate([
-            'search' => ['required', 'string', 'min:3'],
-            ]);
-        $searchTerm=$data["search"];
-        $results=Result::where("completed",1)
-                        ->where("public",1)
-                ->where(function($query) use ($searchTerm){
-                    $query->where("rider_name","LIKE","%".$searchTerm."%")
-                            ->orWhere("rider_id",$searchTerm)
-                            ->orWhere("horse_id",$searchTerm)
-                            ->orWhere("horse_name","LIKE","%".$searchTerm."%");})
-                ->orderBy("rider_name")
-                ->get();
-
-        return view("result.search",["results"=>$results]);
     }
        private function generateID(){
 
@@ -311,18 +275,11 @@ class ResultController extends Controller
     }
 
     //calculate the achived percentage 
-    private function percent(Result $result, float $point){
+    private function percent(Result $result, int $point){
         $total=0;
         $maxMark=$result->event->program->maxMark;
         
         return $point*100.0/$maxMark;
-    }
-    private function sendMail(Result $result){
-           $user = $result->user;
-           $locale=app()->getLocale();
-           if ($user!=null ){
-            Mail::to($user->email)->locale($locale)->send(new NewResultMail($result));
-           }
     }
 
     //calculating the collective marks
