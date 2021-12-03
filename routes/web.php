@@ -6,7 +6,7 @@ use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ResultFileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,7 +58,7 @@ Route::get('/event/edit/{event}', [EventController::class, 'edit']);
 Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
 
-Route::get('/event/export/{event}', [ResultFileController::class, 'exportResultExcel']);
+Route::get('/event/export/{event}', [EventController::class, 'exportResultExcel']);
 
 Route::get('/user/create', [UserController::class, 'create']);
 

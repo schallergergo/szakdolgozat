@@ -18,12 +18,10 @@ class ResultPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(?User $user)
     {
-        //if user is loged in, return true
-        if ($user!=null) return true;
-
-        return false;
+       
+        return true;
     }
 
     /**
@@ -49,12 +47,7 @@ class ResultPolicy
      */
 
 
-    // adding new rider to the event, only with the given roles
 
-
-    //megjegyzés: ez így nem teljes, a versenyszám (event) irodához és írnokhoz lesz rendelve
-    //mindenki csak a hozzá rendelt eseményt kezelheti
-    //ezért is van az adatbázisban a kapcsolat úgy jelölve
     public function create(User $user,Event $event)
     {   
         if (Auth::User()->role=="admin") return true;
@@ -73,14 +66,6 @@ class ResultPolicy
      */
 
 
-    //updating the result, the penciler can only do it once, 
-    //any additional change needs to go through the office
-
-
-
-    //megjegyzés: ez így nem teljes, a versenyszám (event) irodához és írnokhoz lesz rendelve
-    //mindenki csak a hozzá rendelt eseményt kezelheti
-    //ezért is van az adatbázisban a kapcsolat úgy jelölve
     public function update(User $user,Result $result)
     {
         //dd("hit update");
@@ -91,19 +76,7 @@ class ResultPolicy
         return false;
     }
 
-    //used for the event/show blade who can check the result after is completed
 
-    // megjegyzés: ua
-
-     public function checkAfter(User $user,Result $result)
-    {
-        //dd("hit update");
-        if (Auth::User()->role=="admin") return true;
-        if ($result->event->active==false) return false;
-        if (Auth::User()->role=="office") return true;
-        if (Auth::User()->role=="penciler") return true;
-        return false;
-    }
     /**
      * Determine whether the user can delete the model.
      *

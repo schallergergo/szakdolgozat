@@ -15,16 +15,7 @@ class UserController extends Controller
         $this->authorizeResource(User::class);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
+  
     /**
      * Show the form for creating a new resource.
      *
@@ -62,6 +53,8 @@ class UserController extends Controller
         else $this->storeAdmin($data);
         return redirect("/home");
     }
+
+//saves a new penciler
 private function storePenciler(array $data){
 
         $this->authorize('createPenciler',User::class);
@@ -75,7 +68,7 @@ private function storePenciler(array $data){
         ]);
 
 }
-
+//can save any new user with any role
 private function storeAdmin(array $data){
     $this->authorize('isAdmin',User::class);
       $newEvent=\App\Models\User::create([
@@ -87,48 +80,5 @@ private function storeAdmin(array $data){
         ]);
 
 }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
-    }
+  
 }

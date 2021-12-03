@@ -153,7 +153,7 @@
                             <span class="align-middle"><a href="/result/editinfo/{{$result->id}}" target="_blank">{{__("Edit competitor info")}}</a></span><br>
                         @endcan
 
-                        @can('checkAfter',$result)
+                        @can('update',$result)
                         
                             <span class="align-middle"><a href="/result/show/{{$result->id}}" target="_blank">{{__("View the test sheet")}}</a></span>
 

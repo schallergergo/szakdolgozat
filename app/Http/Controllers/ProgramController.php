@@ -12,11 +12,15 @@ class ProgramController extends Controller
     {
         $this->authorizeResource(Program::class);
     }
+
+    //show all programs
     public function index(){
         $programs=Program::all();
 
         return view("program.index",["programs"=>$programs]);
     }
+
+    //show a specific program
     public function show(Program $program){
     	
     	$blocks=$program->block->where("programpart",1);
@@ -28,13 +32,14 @@ class ProgramController extends Controller
     	]);
     }
     
+    //return the view to create a program
     public function create(){
     	
     	
     	return view('program.create');
     }
 
-    
+    //stores the new program
     public function store(){
 
         $data = request();
@@ -67,9 +72,12 @@ class ProgramController extends Controller
     	return redirect("/block/create/{$program->id}");
     }
 
+    //returns the view to edit a program
     public function edit(Program $program){
         return view("program.edit",["program"=>$program]);
     }
+
+    //updates a given program
     public function update(Program $program)
     {
 

@@ -193,6 +193,7 @@ class ResultController extends Controller
         return redirect("result/show/{$resultID}");
         
     }
+
     public function editInfo (Result $result){
         $this->authorize('update', $result);
         return view("result.editInfo",
@@ -206,7 +207,7 @@ class ResultController extends Controller
                 "category"=>$result->category,
             ]);
     }
-
+    //updates the information for a competitor
     public function updateInfo(Result $result){
         $this->authorize('update', $result);
         $data = request();
@@ -228,7 +229,7 @@ class ResultController extends Controller
         
     }
 
-
+    //implements search functionality
     public function search(){
         $data = request();
 
@@ -249,6 +250,8 @@ class ResultController extends Controller
 
         return view("result.search",["results"=>$results]);
     }
+
+
        private function generateID(){
 
         //lower limit of the id
@@ -269,7 +272,7 @@ class ResultController extends Controller
         return $id;
     }
 
-    //calculating the result
+
 
 
     //generating an empty assassment json based on the number of blocks

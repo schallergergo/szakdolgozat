@@ -60,11 +60,9 @@ class EventController extends Controller
             'position' => ['required', 'string', 'max:255']
             ]);
 
-        //number of blocks for a given program, 
         $office=Auth::User()->id;
 
-        //the id of the given event
-
+        //creates the Event in the DB
         $newEvent=\App\Models\Event::create([
             'competitionname' => $data["competitionname"],
             'venue' => $data["venue"],
@@ -80,6 +78,7 @@ class EventController extends Controller
         return redirect("event/edit/{$newEvent->id}");
     }
   
+    //update the event
     public function update(Event $event)
     {
         $this->authorize('update', $event);
@@ -97,6 +96,8 @@ class EventController extends Controller
         $event->update($data);
         return redirect("event/show/{$event->id}");
     }
+
+    //change the status of an event  between active/not active
     public function changeStatus(Event $event)
     {
     $this->authorize('changeStatus', $event);
@@ -104,6 +105,10 @@ class EventController extends Controller
       $event->save();
       return redirect()->back();
     }
-
+    //exports the results
+    public function exportResultExcel(Event $event){
+            $this->authorize('update', $event);
+        return Excel::download(new ResultExport($event), 'result.xlsx');
+    }
 
 }

@@ -14,18 +14,7 @@ class BlockController extends Controller
     {
         $this->authorizeResource(Block::class);
     }
-
-    public function show(Program $program){
-    	
-    	$blocks=$program->block->where("programpart",1);
-    	$collectivemarks=$program->block->where("programpart",2);
-    	return view('program.show',[
-    		"program"=>$program,
-    		"blocks"=>$blocks,
-    		"collectivemarks"=>$collectivemarks
-    	]);
-    }
-    
+    //creates a new block to a specific program
     public function create(Program $program){
     	
     	$ordinal=count($program->block)+1;
@@ -33,7 +22,7 @@ class BlockController extends Controller
     	return view('block.create',['program'=>$program,'ordinal'=>$ordinal]);
     }
 
-    
+    //stores the new block
     public function store(Program $program){
 
         $data = request();
@@ -52,7 +41,7 @@ class BlockController extends Controller
 
 
         
-
+        //creates the block in the DB
 
         $block=\App\Models\Block::create([
         	'program_id'=>$program->id,
@@ -63,14 +52,21 @@ class BlockController extends Controller
             'maxmark' => $data['maxmark'],
             'coefficient' => $data['coefficient'],
         ]);
+
         $blockCount=count($program->block);
+
+        //create blocks until the numofblocks is reached, then redirect to the program.show blade
 
     	if ($blockCount>=$program->numofblocks) return redirect("/program/show/{$program->id}");
         else return redirect("/block/create/{$program->id}");
     }
+
+    //show the editing view
      public function edit(Block $block){
         return view("block.edit",["block"=>$block]);
     }
+
+    //update the block
     public function update(Block $block)
     {
 

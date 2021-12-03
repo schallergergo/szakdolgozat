@@ -44,7 +44,7 @@ class HomeController extends Controller
         return view("result.index.rider",["results"=>$results]);
     }
 
-
+        //the home screen for office
     private function officeIndex(User $user){
         $toMatch=[
             "office"=>$user->id,
@@ -53,6 +53,7 @@ class HomeController extends Controller
         $events=Event::where($toMatch)->orderBy('date','desc')->paginate(10); 
         return view("event.index",["events"=>$events]);
     }
+    //the home screen for penciler
     private function pencilerIndex(User $user){
         $toMatch=[
             "penciler"=>$user->id,
@@ -62,7 +63,7 @@ class HomeController extends Controller
         return view("event.index",["events"=>$events]);
     }
 
-
+    //the home screen for admin
     private function adminIndex(User $user){
         $events=Event::orderBy('date','desc')->paginate(10); 
         return view("event.index",["events"=>$events]);

@@ -17,7 +17,7 @@ class ProgramPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(?User $user) //?User jelenti, hogy nem kell bejelentkezni
+    public function viewAny(?User $user) 
     {
 
          return true;
