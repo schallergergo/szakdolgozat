@@ -15,13 +15,16 @@ class CreateEventsTable extends Migration
     {
          Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('versenynev');
-            $table->string('versenyszamnev');
+            $table->string('competitionname');
+            $table->string('venue');
+            $table->date('date');
+            $table->string('eventname');
             $table->integer('program_id');
-            $table->unsignedBigInteger("iroda");
-            $table->unsignedBigInteger('irnok');
-            $table->string('biro')->default("");
-            $table->string("pozicio")->nullable();
+            $table->unsignedBigInteger("office");
+            $table->unsignedBigInteger('penciler');
+            $table->string('judge')->default("");
+            $table->string("position")->nullable();
+            $table->boolean("acitve")->default(1);
             $table->timestamps();
         });
     }

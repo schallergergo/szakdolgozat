@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Edit event') }}</div>
+                <div class="card-header">{{ __('New event') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="/event/store" enctype="multipart/form-data">

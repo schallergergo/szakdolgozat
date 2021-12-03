@@ -66,6 +66,20 @@ class EventPolicy
     }
 
     /**
+     * Determine whether the user can change the status of the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\=Event  $=Event
+     * @return mixed
+     */
+     public function changeStatus(User $user,Event $event)
+    {
+        if (Auth::User()->role=="admin") return true;
+
+        return false;
+    }
+
+    /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user

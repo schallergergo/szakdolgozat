@@ -55,7 +55,7 @@ class ResultController extends Controller
     //editing a result, this is method is used both for the first edit, and for the edits afterwards
     public function edit(Result $result){
         $this->authorize('update', $result);
-    	$this->lastOpened($result);
+
         //first part of the program, with the moves to be executed
         $blocks=$result->event->program->block->where("programpart",1);
 
@@ -79,18 +79,10 @@ class ResultController extends Controller
                                     "eliminated"=>$eliminated,
                                 ]);
     }
-    private function lastOpened(Result $result){
-    	$user=Auth::User();
-    	
-    	$user->last_opened=$result->id;
-    	$user->save();
-    	
 
-
-    }
     //result log: logs every modification, for every result, triggered by the update function
-    public function ResultLog($result_id,$mark,$assassment){
-    $this->authorize('update', $result);
+    private function ResultLog($result_id,$mark,$assassment){
+
         \App\Models\Resultlog::create([
             'result_id' => $result_id,
             'mark'=>$mark,
@@ -203,7 +195,7 @@ class ResultController extends Controller
     }
     public function editInfo (Result $result){
         $this->authorize('update', $result);
-        return view("result.updateInfo",
+        return view("result.editInfo",
             [
                 "result_id"=>$result->id,
                 "rider_id"=>$result->rider_id,
@@ -232,7 +224,7 @@ class ResultController extends Controller
 
               
         $result->update($dataOut);
-        return redirect("/");
+         return redirect("event/show/{$result->event->id}");
         
     }
 

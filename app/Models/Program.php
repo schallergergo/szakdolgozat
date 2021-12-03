@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Program extends Model
 {
     use HasFactory;
-      protected $fillable = [
+           protected $guarded = [
 
     ];
-
     public function block(){
     	return $this->hasMany(Block::class);
     }

@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Add new competitor') }}</div>
+                <div class="card-header">{{ __('Modify') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="/result/updateinfo/{{$result_id}}" enctype="multipart/form-data">
@@ -103,7 +103,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('New rider') }}
+                                    {{ __('Modify') }}
                                 </button>
                             </div>
                         </div>

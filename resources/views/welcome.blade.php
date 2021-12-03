@@ -73,7 +73,7 @@
                 </div>
                 <div class="links flex">
                     <a href="/result/search">{{__("Search")}}</a>
-
+                    <a href="/program/index">{{__("Programs")}}</a>
                     @if (session('locale')=='en')
                   	<a href="lang/hu">Magyar változat</a>
                   	@else

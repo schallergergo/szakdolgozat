@@ -16,8 +16,8 @@ class CreateResultlogsTable extends Migration
         Schema::create('resultlogs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('result_id');
-            $table->json('ertekeles');
-            $table->float('pont')->default(0);
+            $table->json('assassment');
+            $table->float('mark')->default(0);
             $table->string('user');
             $table->timestamps();
         });

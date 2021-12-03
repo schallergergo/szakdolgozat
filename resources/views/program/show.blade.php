@@ -7,7 +7,9 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-
+                     @can("create",App\Models\Block::class)
+                    <a href="/block/create/{{$program->id}}">{{__("Add new block")}}</a>
+                    @endcan
                 </div>
                 
                 <div class="card-body">
@@ -55,10 +57,13 @@
                         </div>
                         @endif
                         <div class="col-md-1 p-2 border">
-                        <input type="number" class="form-control mark" name="mark[]" value = "" step=0.5 min=0 max=10 required>
+                       
                     </div>
+                        
                     <div class="col-md-3 p-2 border">
-        <textarea class="form-control" name="remark[]"></textarea>
+                        @can ("update",$block)
+                        <a href="/block/edit/{{$block->id}}">{{__("Edit")}}</a>
+                        @endcan
                     </div>
                             </div> <!--end of the row-->
 
@@ -84,7 +89,7 @@
                         <div class="col-md-1 p-2 border">
                             <p>{{ $block['ordinal'] }}</p>
                         </div>
-                        @if ($block["programresz"]===1)
+                        @if ($block["programpart"]===1)
                         <div class="col-md-2 p-2 border">
                             <pre>{{ $block['letters'] }}</pre>
                         </div>
@@ -114,10 +119,12 @@
                         </div>
                         @endif
                         <div class="col-md-1 p-2 border">
-                        <input type="number" class="form-control mark" name="mark[]" value = "" step=0.5 min=0 max=10 required>
+
                     </div>
                     <div class="col-md-3 p-2 border">
-                        <textarea class="form-control" name="remark[]"></textarea>
+                        @can ("update",$block)
+                        <a href="/block/edit/{{$block->id}}">{{__("Edit")}}</a>
+                        @endcan
                     </div>
                             </div> <!--end of the row-->
 

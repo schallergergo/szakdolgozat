@@ -18,6 +18,9 @@
 	"Eliminated":"Kizárva",
 	"points":"pont",
 	"Points":"Pont",
+	"View":"Megtekintés",
+	"Edit":"Szerkesztés",
+	"Programs":"Programok",
 	"Percentage":"Százalék",
 	"Export results":"Eredmények exportálása",
 	"Updated":"Módosítva",
@@ -142,7 +145,7 @@
     "If you did not receive the email":"Ha nem kaptad meg az emailt",
     "click here to request another":"ide kattintva kérhetsz újat",
 	"Regards":"Üdv",
-
+	"Modify":"Módosítás",
 	"Add new block":"Új feladat hozzáadása",
 	"Ordinal":"Sorszám",
 	"Program part":"Program rész",
@@ -168,6 +171,7 @@
 	"New program":"Új program",
 	"Eventing":"Lovastusa",
 	"Dressage":"Díjlovaglás",
-	"Pony Club":"Póni klub"
+	"Pony Club":"Póni klub",
+	"Change status":"Státusz módosítása"
 
 }

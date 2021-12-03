@@ -29,11 +29,13 @@ Route::get('/program/index', [ProgramController::class,'index']);
 Route::get('/program/show/{program}', [ProgramController::class,'show']);
 Route::get('/program/create', [ProgramController::class,'create']);
 Route::post('/program/store', [ProgramController::class,'store']);
-
+Route::get('/program/edit/{program}', [ProgramController::class,'edit']);
+Route::patch('/program/update/{program}', [ProgramController::class,'update']);
 
 Route::get('/block/create/{program}', [BlockController::class,'create']);
 Route::post('/block/store/{program}', [BlockController::class,'store']);
-
+Route::get('/block/edit/{block}', [BlockController::class,'edit']);
+Route::patch('/block/update/{block}', [BlockController::class,'update']);
 
 
 Route::get('/result/index', [ResultController::class, 'index']);
@@ -54,7 +56,8 @@ Route::get('/event/create', [EventController::class, 'create']);
 Route::post('/event/store', [EventController::class, 'store']);
 Route::get('/event/edit/{event}', [EventController::class, 'edit']);
 Route::patch('/event/update/{event}', [EventController::class, 'update']);
-Route::post('/event/lastresult/{event}', [EventController::class, 'getLastResult']);
+Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
+
 Route::get('/event/export/{event}', [ResultFileController::class, 'exportResultExcel']);
 
 Route::get('/user/create', [UserController::class, 'create']);

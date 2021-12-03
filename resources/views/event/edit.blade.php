@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Versenyszám hozzáadása')
+
 @section('content')
 
 
@@ -12,8 +12,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Modify event') }} <br>
-                 <a href="/event/show/{{$event->id}}">{{__("View event details")}}</a></div>
+                <div class="card-header">{{ __('Modify event') }} 
+
+                    @if ($event->active)  <span class="text-success"> {{__("Active")}}</span>
+                    @else <span class="text-danger"> {{__("Not active")}}</span>
+                    @endif
+                <br>
+
+                @can('changeStatus', $event)
+                <a href="/event/status/{{$event->id}}">{{__("Change status")}}</a>
+                @endcan
+                 <a href="/event/show/{{$event->id}}">{{__("View event details")}}</a>
+             </div>
 
                 <div class="card-body">
                     <form method="POST" action="/event/update/{{$event->id}}" enctype="multipart/form-data">

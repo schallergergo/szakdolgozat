@@ -6,7 +6,12 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Programs') }}</div>
+                <div class="card-header">
+                    {{ __('Programs') }}
+                     @can("create",App\Models\Program::class)
+                    <a href="/program/create">{{__("Add new program")}}</a>
+                    @endcan
+                </div>
 
                 <div class="card-body">
 
@@ -29,6 +34,9 @@
 
                         <div class="col-md-3 p-1 border">
                             <span class="align-middle"><a href="/program/show/{{$program->id}}" target="_blank">  {{__("View program")}}</a></span>
+                             @can ("update",$program)
+                            <span class="align-middle"><a href="/program/edit/{{$program->id}}" target="_blank">  {{__("Edit")}}</a></span>
+                            @endcan
                         </div>
 
                     </div><!-- end of the row-->

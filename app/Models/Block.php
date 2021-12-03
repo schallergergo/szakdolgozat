@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Block extends Model
 {
     use HasFactory;
-     use HasFactory;
+    protected $guarded =[];
     public function program(){
     	return $this->belongsTo(Program::class);
     }

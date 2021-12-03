@@ -44,7 +44,7 @@ class BlockController extends Controller
             
             'ordinal' => ['required', 'integer'],
             'programpart' => ['required', 'integer'],
-            'letters'=> ['required','string'],
+            'letters'=> ['nullable','string'],
             'criteria'=> ['required','string'],
             'maxmark' => ['required', 'integer'],
             'coefficient' => ['required', 'integer'],
@@ -63,9 +63,29 @@ class BlockController extends Controller
             'maxmark' => $data['maxmark'],
             'coefficient' => $data['coefficient'],
         ]);
+        $blockCount=count($program->block);
 
-    	
-    	return redirect("/block/create/{$program->id}");
+    	if ($blockCount>=$program->numofblocks) return redirect("/program/show/{$program->id}");
+        else return redirect("/block/create/{$program->id}");
+    }
+     public function edit(Block $block){
+        return view("block.edit",["block"=>$block]);
+    }
+    public function update(Block $block)
+    {
+
+        $data = request();
+        $data=$data->validate([
+            'ordinal' => ['required', 'integer'],
+            'programpart' => ['required', 'integer'],
+            'letters'=> ['nullable','string'],
+            'criteria'=> ['required','string'],
+            'maxmark' => ['required', 'integer'],
+            'coefficient' => ['required', 'integer'],
+            ]);
+
+        $block->update($data);
+        return redirect("program/show/{$block->program->id}");
     }
 
 

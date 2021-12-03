@@ -67,5 +67,22 @@ class ProgramController extends Controller
     	return redirect("/block/create/{$program->id}");
     }
 
+    public function edit(Program $program){
+        return view("program.edit",["program"=>$program]);
+    }
+    public function update(Program $program)
+    {
 
+        $data = request();
+        $data=$data->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'numofblocks' => ['required', 'integer'],
+            'maxMark' => ['required', 'integer'],
+            'typeofevent' => ['required', 'string', 'max:255'],
+            'doublesided' => ['required', 'boolean'],
+            ]);
+
+        $program->update($data);
+        return redirect("program/index");
+    }
 }
