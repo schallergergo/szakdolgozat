@@ -17,10 +17,14 @@
 	"Fill in the test sheet":"Pontozólap kitöltése",
 	"Eliminated":"Kizárva",
 	"points":"pont",
-	"Points":"Pont",
+	"Change status":"Státusz módosítása",
+	"Active":"Aktív",
 	"View":"Megtekintés",
 	"Edit":"Szerkesztés",
 	"Programs":"Programok",
+	"Not active":"Nem aktív",
+	"Points":"Pont",
+	"Modify":"Módosítás",
 	"Percentage":"Százalék",
 	"Export results":"Eredmények exportálása",
 	"Updated":"Módosítva",
@@ -74,7 +78,7 @@
 	"Password again":"Jelszó újra",
 	"Contact":"Kontakt",
 	"Dressage results":"Díjlovas eredmények",
-	"Edit competitor info":"Versenyző adat módosítása",
+	"Edit competitor info":"Adatok módosítása",
 	"Editing competitor info":"Versenyzői adatok módosítása",
 	"Add new event":"Új versenyszám hozzáadása",
 	"Name of the event":"Versenyszám elnevezése",
@@ -145,7 +149,7 @@
     "If you did not receive the email":"Ha nem kaptad meg az emailt",
     "click here to request another":"ide kattintva kérhetsz újat",
 	"Regards":"Üdv",
-	"Modify":"Módosítás",
+
 	"Add new block":"Új feladat hozzáadása",
 	"Ordinal":"Sorszám",
 	"Program part":"Program rész",
@@ -171,7 +175,6 @@
 	"New program":"Új program",
 	"Eventing":"Lovastusa",
 	"Dressage":"Díjlovaglás",
-	"Pony Club":"Póni klub",
-	"Change status":"Státusz módosítása"
+	"Pony Club":"Póni klub"
 
 }
