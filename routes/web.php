@@ -1,12 +1,13 @@
 <?php
-
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\ResultFileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +38,6 @@ Route::post('/block/store/{program}', [BlockController::class,'store']);
 Route::get('/block/edit/{block}', [BlockController::class,'edit']);
 Route::patch('/block/update/{block}', [BlockController::class,'update']);
 
-
 Route::get('/result/index', [ResultController::class, 'index']);
 Route::get('/result/show/{result}', [ResultController::class, 'show']);
 Route::get('/result/create/{event}', [ResultController::class, 'create']);
@@ -57,9 +57,7 @@ Route::post('/event/store', [EventController::class, 'store']);
 Route::get('/event/edit/{event}', [EventController::class, 'edit']);
 Route::patch('/event/update/{event}', [EventController::class, 'update']);
 Route::get('/event/status/{event}', [EventController::class, 'changeStatus']);
-
-Route::get('/event/export/{event}', [EventController::class, 'exportResultExcel']);
-
+Route::get('/event/export/{event}', [ResultFileController::class, 'exportResultExcel']);
 Route::get('/user/create', [UserController::class, 'create']);
 
 
@@ -78,7 +76,6 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
-
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
 
