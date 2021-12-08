@@ -187,7 +187,7 @@ class ResultController extends Controller
         //creating a log record
         $this->ResultLog($resultID,$mark,$assassment);
 
-        $this->sendMail($result);
+        //$this->sendMail($result);
         //updating the result record
         $result->update($dataOut);
         return redirect("result/show/{$resultID}");

@@ -105,10 +105,6 @@ class EventController extends Controller
       $event->save();
       return redirect()->back();
     }
-    //exports the results
-    public function exportResultExcel(Event $event){
-            $this->authorize('update', $event);
-        return Excel::download(new ResultExport($event), 'result.xlsx');
-    }
+  
 
 }

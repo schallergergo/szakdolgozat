@@ -15,10 +15,7 @@
                     @can ("create",[App\Models\Result::class,$event])
                     <a href="/result/create/{{$event->id}}" target="_blank">{{__("Add new rider")}}</a>
                     @endcan
-                    @can('update',$event)
-                    <a href="/event/export/{{$event->id}}" target="_blank">{{__("Export results")}}</a>
-
-                    @endcan
+                  
                     @if (count($toStart)!=0)
                     
                    

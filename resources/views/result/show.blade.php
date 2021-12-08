@@ -139,7 +139,7 @@
                         @endforeach
                         <div class="row">
                         <div class="col-md-12 p-1 border text-right">
-                        @if ($result->kizarva==0)
+                        @if ($result->eliminated==0)
                             {{__("Points")}}: <strong>{{number_format($result->mark, 1) }} {{__("points")}}  </strong>
                             - {{__("Percentage")}}: <strong>{{number_format($result->percent, 2) }} %       </strong>
                                 @if ($result->error!=0)
@@ -147,7 +147,7 @@
 
                         @endif
                         @else
-                        <strong>{{__("Eliminated!")}}</strong>
+                        <strong>{{__("Eliminated")}}</strong>
                         @endif
 
                                 - {{__("Updated")}}: <strong>{{$result->updated_at}}</strong>
