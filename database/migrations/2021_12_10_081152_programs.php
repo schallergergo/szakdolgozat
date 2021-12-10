@@ -15,12 +15,13 @@ class Programs extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->enum('descipline', ['lovastusa','poniklub']);
             $table->string('name');
             $table->integer('numofblocks');
             $table->integer('maxMark');
-            $table->enum('role', ['normal'])->default("normal");
+            $table->enum('typeofevent', ['normal'])->default("normal");
             $table->boolean('doublesided');
-            $table->boolean('active');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class Programs extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('programs');
     }
 }
